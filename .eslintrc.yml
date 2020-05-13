@@ -2,11 +2,11 @@ env:
   browser: true
   es6: true
 extends:
-  - 'react-app'
-  - 'plugin:react/recommended'
   - 'airbnb'
+  - 'react-app'
   - 'prettier/@typescript-eslint'
   - 'plugin:prettier/recommended'
+  - 'plugin:react/recommended'
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
@@ -42,4 +42,5 @@ rules: {
       'ts': never,
     }
   ],
+  'import/prefer-default-export': 0
 }
