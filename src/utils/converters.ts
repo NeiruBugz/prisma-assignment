@@ -1,4 +1,4 @@
-export const csvToJSONConverter = (csv: string) => {
+export const csvConverter = (csv: string) => {
   const lines = csv.split('\n');
   const result: any = [];
   let headers = lines[0].split(',');
@@ -18,4 +18,4 @@ export const csvToJSONConverter = (csv: string) => {
 };
 
 const computeConversion = (obj: any) =>
-  Object.assign(obj, { conversion: (Number(obj.trials) / Number(obj.installs)).toFixed(1) });
+  Object.assign(obj, { conversion: (Number(obj.trials) / Number(obj.installs)).toFixed(2) });
