@@ -4,7 +4,7 @@ export const csvConverter = (csv: string) => {
   let headers = lines[0].split(',');
   headers = headers.map((header) => header.match(/\w+/)).flat();
 
-  for (let i = 1; i < lines.length; i++) {
+  for (let i = 1; i < lines.length - 1; i++) {
     const obj: any = {};
     const currentLine = lines[i].split(',');
     for (let j = 0; j < headers.length; j++) {
