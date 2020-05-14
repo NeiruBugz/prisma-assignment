@@ -1,10 +1,10 @@
 import React, { FC, useCallback, useMemo, useState } from 'react';
-import ReactDataGrid, { SortDirection } from 'react-data-grid';
+import ReactDataGrid, { RowsUpdateEvent, SortDirection } from 'react-data-grid';
 import { Row } from '../../../../types/row.types';
 import { DataColumns } from './datagrid.utils';
 
 interface DataGridProps {
-  data: Row[] | any;
+  data: Row[];
 }
 
 const EmptyGrid = () => (
@@ -18,8 +18,8 @@ const EmptyGrid = () => (
 
 // @ts-ignore
 export const DataGrid: FC<DataGridProps> = ({ data }) => {
-  const [rows] = useState<Row[]>(data);
-  const [[sortColumn, sortDirection], setSort] = useState<[string, SortDirection]>(['index', 'NONE']);
+  const [rows, setRows] = useState<Row[]>(data);
+  const [[sortColumn, sortDirection], setSort] = useState<[string, SortDirection]>(['date', 'DESC']);
 
   const handleRowsSort = useCallback((columnKey: string, direction: SortDirection) => {
     setSort([columnKey, direction]);
@@ -28,10 +28,9 @@ export const DataGrid: FC<DataGridProps> = ({ data }) => {
   const sortedRows = useMemo((): readonly Row[] => {
     if (sortDirection === 'NONE') return rows;
 
-    // eslint-disable-next-line no-shadow
-    let sortedRows: Row[] = [...rows];
+    let newSortedRows: Row[] = [...rows];
 
-    const comparer = (a: { [x: string]: number }, b: { [x: string]: number }) => {
+    const comparer = (a: any, b: any) => {
       return a[sortColumn] > b[sortColumn] ? 1 : -1;
     };
 
@@ -39,25 +38,35 @@ export const DataGrid: FC<DataGridProps> = ({ data }) => {
       case 'date':
         break;
       default:
-        // @ts-ignore
-        sortedRows = sortedRows.sort(comparer);
+        newSortedRows = newSortedRows.sort(comparer);
         break;
     }
 
-    debugger;
-
-    return sortDirection === 'DESC' ? sortedRows.reverse() : sortedRows;
+    return sortDirection === 'DESC' ? newSortedRows.reverse() : newSortedRows;
   }, [rows, sortColumn, sortDirection]);
+
+  // const handleRowsUpdate = useCallback(
+  //   ({ fromRow, toRow, updated }: RowsUpdateEvent<Partial<Row>>) => {
+  //     const newRows = [...sortedRows];
+  //
+  //     for (let i = fromRow; i <= toRow; i++) {
+  //       newRows[i] = { ...newRows[i], ...updated };
+  //     }
+  //
+  //     setRows(newRows);
+  //   },
+  //   [sortedRows],
+  // );
 
   return (
     sortedRows?.length && (
       <ReactDataGrid
-        width={1366}
-        height={768}
+        width={1200}
+        height={480}
         minColumnWidth={150}
         columns={DataColumns}
         rows={sortedRows}
-        onSort={handleRowsSort}
+        onSort={(sortedColumn, direction) => handleRowsSort(sortedColumn, direction)}
         sortDirection={sortDirection}
         emptyRowsRenderer={EmptyGrid}
       />
