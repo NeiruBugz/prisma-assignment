@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sidebar } from './components/Sidebar/Sidebar';
+import { Sidebar } from './components/Sidebar';
 import { Dashboard } from './layouts/Dashboard/Dashboard';
 
 export const App: React.FC<{}> = () => {

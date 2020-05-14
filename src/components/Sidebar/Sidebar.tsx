@@ -3,13 +3,16 @@ import React from 'react';
 import { MenuLink } from '../MenuLink';
 
 import { mockLinks } from './sidebar.mock';
+import logo from '../../assets/logo.svg';
 
 export const Sidebar = () => {
   return (
     <aside className="sidebar">
-      {mockLinks.map((link, idx) => (
-        <MenuLink label={link.label} href={link.href} key={`${link.label}-${link.href}`} />
-      ))}
+      <section className="sidebar__user">
+        <img src={logo} alt="user-icon" className="sidebar__image" />
+        <span className="sidebar__username">Nail Badiullin</span>
+        <span className="sidebar__userlabel">Test Assignment</span>
+      </section>
     </aside>
   );
 };

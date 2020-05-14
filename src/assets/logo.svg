@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="162px" height="162px" viewBox="0 0 162 162" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>lensa-app-icon copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M36.5353641,-1.47607244e-15 L91.4646359,1.47607244e-15 C104.168778,-8.57640595e-16 108.775607,1.32276496 113.420051,3.80664103 C118.064496,6.2905171 121.709483,9.93550428 124.193359,14.5799487 C126.677235,19.2243932 128,23.8312221 128,36.5353641 L128,91.4646359 C128,104.168778 126.677235,108.775607 124.193359,113.420051 C121.709483,118.064496 118.064496,121.709483 113.420051,124.193359 C108.775607,126.677235 104.168778,128 91.4646359,128 L36.5353641,128 C23.8312221,128 19.2243932,126.677235 14.5799487,124.193359 C9.93550428,121.709483 6.2905171,118.064496 3.80664103,113.420051 C1.32276496,108.775607 5.71760396e-16,104.168778 -9.84048292e-16,91.4646359 L9.84048292e-16,36.5353641 C-5.71760396e-16,23.8312221 1.32276496,19.2243932 3.80664103,14.5799487 C6.2905171,9.93550428 9.93550428,6.2905171 14.5799487,3.80664103 C19.2243932,1.32276496 23.8312221,8.57640595e-16 36.5353641,-1.47607244e-15 Z" id="path-1"/>
+        <filter x="-22.3%" y="-17.6%" width="144.5%" height="144.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur stdDeviation="8.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.15463833 0" type="matrix" in="shadowBlurOuter1"/>
+        </filter>
+        <path d="M95.5106736,69.7120863 C103.739557,84.2305002 96.8888991,96 80.1945785,96 L47.8073165,96 C31.1195868,96 24.2655456,84.2248401 32.4912214,69.7120863 L49.1012352,40.4066472 C57.3301191,25.8882334 70.674984,25.8938935 78.9006598,40.4066472 L95.5106736,69.7120863 Z M81.7133764,72.9378141 L69.4796544,51.5105792 C66.4570151,46.2164584 61.561103,46.2196352 58.5402775,51.5105792 L46.3065555,72.9378141 C43.2839162,78.231935 45.7806226,82.5179158 51.8790541,82.5179158 L76.1408778,82.5179158 C82.2451682,82.5179158 84.7342019,78.2287582 81.7133764,72.9378141 Z" id="path-3"/>
+    </defs>
+    <g id="v5" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PrismaLabs-Landing-Copy-3" transform="translate(-227.000000, -1564.000000)">
+            <g id="Group-2-Copy" transform="translate(0.000000, 1482.000000)">
+                <g id="lensa-app-icon-copy" transform="translate(244.000000, 93.000000)">
+                    <g id="Path">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"/>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"/>
+                    </g>
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"/>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

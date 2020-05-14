@@ -40,7 +40,7 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
   {
     key: 'date',
     name: 'Date',
-    formatter: DateFormatter,
+    // formatter: DateFormatter,
   },
   {
     key: 'state',

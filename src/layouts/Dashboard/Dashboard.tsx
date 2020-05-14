@@ -1,26 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import path from 'path';
 import { DataGrid } from './components/DataGrid/DataGrid';
-import { csvConverter } from '../../utils';
-import { Row } from '../../types/row.types';
+import { csvConverter, getChartData } from '../../utils';
+import { ChartData, Row } from '../../types/row.types';
+import { Chart } from './components/Chart/Chart';
 
 export const Dashboard = () => {
   const [data, setData] = useState<Row[]>([]);
+  const [chartData, setChartData] = useState<ChartData[]>();
+  const [filterDate] = useState('2019-12-31');
 
   useEffect(() => {
     fetch('./frontend-data.csv')
       .then((response) => response.text())
-      .then((result) => setData(csvConverter(result)))
+      .then((result) => {
+        setData(csvConverter(result));
+        setChartData(getChartData(csvConverter(result), filterDate).slice(0, 100));
+      })
       .catch((error) => {
         setData([]);
         throw new Error(error);
       });
-  }, []);
+  }, [data, filterDate]);
 
   return (
     <section className="dashboard">
       {data?.length ? (
-        <DataGrid data={data} />
+        <>
+          <h2>
+            Chart data for &nbsp;
+            {new Date(filterDate).toLocaleString()}
+          </h2>
+          <Chart data={chartData} width={1024} />
+          <DataGrid data={data} />
+        </>
       ) : (
         <svg
           version="1.1"
