@@ -38,19 +38,17 @@ export const DataGrid = <T extends {}>({ data }: GridProps<T>) => {
   }, [rows, sortColumn, sortDirection]);
 
   return (
-    <>
-      <ReactDataGrid
-        width={1024}
-        height={480}
-        minColumnWidth={120}
-        columns={DataColumns}
-        rows={sortedRows}
-        sortDirection={sortDirection}
-        sortColumn={sortColumn}
-        onSort={(sortedColumn, direction) => handleRowsSort(sortedColumn, direction)}
-        emptyRowsRenderer={EmptyGrid}
-        enableFilters
-      />
-    </>
+    <ReactDataGrid
+      width={1024}
+      height={480}
+      minColumnWidth={120}
+      columns={DataColumns}
+      rows={sortedRows}
+      sortDirection={sortDirection}
+      sortColumn={sortColumn}
+      onSort={(sortedColumn, direction) => handleRowsSort(sortedColumn, direction)}
+      emptyRowsRenderer={EmptyGrid}
+      enableFilters
+    />
   );
 };

@@ -13,6 +13,10 @@ export const DateFormatter: React.ComponentType<FormatterProps> = ({ row, column
   <span>{row[column.key] ? new Date(row[column.key]).toLocaleString('ru') : '-'}</span>
 );
 
+export const DigitFormatter: React.ComponentType<FormatterProps> = ({ row, column }) => (
+  <span>{Number(row[column.key])}</span>
+);
+
 export const applyDefaultColumnsParams = <T extends {}>(columns: Column<T>[]): Column<T>[] => {
   const defaultProps: Partial<Column<T>> = {
     sortable: true,
@@ -49,10 +53,12 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
   {
     key: 'installs',
     name: 'Installs',
+    formatter: DigitFormatter,
   },
   {
     key: 'trials',
     name: 'Trials',
+    formatter: DigitFormatter,
   },
   {
     key: 'conversion',
