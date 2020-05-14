@@ -1,10 +1,10 @@
-import React, { FC, useCallback, useMemo, useState } from 'react';
-import ReactDataGrid, { RowsUpdateEvent, SortDirection } from 'react-data-grid';
+import React, { FC, useCallback, useMemo, useRef, useState } from 'react';
+import ReactDataGrid, { SortDirection } from 'react-data-grid';
 import { Row } from '../../../../types/row.types';
 import { DataColumns } from './datagrid.utils';
 
-interface DataGridProps {
-  data: Row[];
+interface GridProps {
+  data: Row[] | any;
 }
 
 const EmptyGrid = () => (
@@ -17,11 +17,11 @@ const EmptyGrid = () => (
 );
 
 // @ts-ignore
-export const DataGrid: FC<DataGridProps> = ({ data }) => {
-  const [rows, setRows] = useState<Row[]>(data);
-  const [[sortColumn, sortDirection], setSort] = useState<[string, SortDirection]>(['date', 'DESC']);
+export const DataGrid: FC<GridProps> = ({ data }) => {
+  const [rows] = useState<Row[]>(data);
+  const [[sortColumn, sortDirection], setSort] = useState<[string | keyof Row, SortDirection]>(['date', 'DESC']);
 
-  const handleRowsSort = useCallback((columnKey: string, direction: SortDirection) => {
+  const handleRowsSort = useCallback((columnKey: string | keyof Row, direction: SortDirection) => {
     setSort([columnKey, direction]);
   }, []);
 
@@ -45,30 +45,19 @@ export const DataGrid: FC<DataGridProps> = ({ data }) => {
     return sortDirection === 'DESC' ? newSortedRows.reverse() : newSortedRows;
   }, [rows, sortColumn, sortDirection]);
 
-  // const handleRowsUpdate = useCallback(
-  //   ({ fromRow, toRow, updated }: RowsUpdateEvent<Partial<Row>>) => {
-  //     const newRows = [...sortedRows];
-  //
-  //     for (let i = fromRow; i <= toRow; i++) {
-  //       newRows[i] = { ...newRows[i], ...updated };
-  //     }
-  //
-  //     setRows(newRows);
-  //   },
-  //   [sortedRows],
-  // );
-
   return (
     sortedRows?.length && (
       <ReactDataGrid
-        width={1200}
+        width={1024}
         height={480}
-        minColumnWidth={150}
+        minColumnWidth={120}
         columns={DataColumns}
         rows={sortedRows}
-        onSort={(sortedColumn, direction) => handleRowsSort(sortedColumn, direction)}
         sortDirection={sortDirection}
+        sortColumn={sortColumn}
+        onSort={(sortedColumn, direction) => handleRowsSort(sortedColumn, direction)}
         emptyRowsRenderer={EmptyGrid}
+        enableFilters
       />
     )
   );

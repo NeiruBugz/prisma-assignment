@@ -18,7 +18,7 @@ export const Dashboard = () => {
 
   return (
     <section className="dashboard">
-      {data ? (
+      {data?.length ? (
         <DataGrid data={data} />
       ) : (
         <svg
