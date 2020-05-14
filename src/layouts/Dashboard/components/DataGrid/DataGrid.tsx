@@ -1,10 +1,10 @@
-import React, { FC, useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import ReactDataGrid, { SortDirection } from 'react-data-grid';
 import { Row } from '../../../../types/row.types';
 import { DataColumns } from './datagrid.utils';
 
-interface GridProps {
-  data: Row[] | any;
+interface GridProps<T> {
+  data: Row[];
 }
 
 const EmptyGrid = () => (
@@ -16,8 +16,7 @@ const EmptyGrid = () => (
   </div>
 );
 
-// @ts-ignore
-export const DataGrid: FC<GridProps> = ({ data }) => {
+export const DataGrid = <T extends {}>({ data }: GridProps<T>) => {
   const [rows] = useState<Row[]>(data);
   const [[sortColumn, sortDirection], setSort] = useState<[string | keyof Row, SortDirection]>(['date', 'DESC']);
 
@@ -33,20 +32,13 @@ export const DataGrid: FC<GridProps> = ({ data }) => {
     const comparer = (a: any, b: any) => {
       return a[sortColumn] > b[sortColumn] ? 1 : -1;
     };
-
-    switch (sortColumn) {
-      case 'date':
-        break;
-      default:
-        newSortedRows = newSortedRows.sort(comparer);
-        break;
-    }
+    newSortedRows = newSortedRows.sort(comparer);
 
     return sortDirection === 'DESC' ? newSortedRows.reverse() : newSortedRows;
   }, [rows, sortColumn, sortDirection]);
 
   return (
-    sortedRows?.length && (
+    <>
       <ReactDataGrid
         width={1024}
         height={480}
@@ -59,6 +51,6 @@ export const DataGrid: FC<GridProps> = ({ data }) => {
         emptyRowsRenderer={EmptyGrid}
         enableFilters
       />
-    )
+    </>
   );
 };

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import path from 'path';
 import { DataGrid } from './components/DataGrid/DataGrid';
 import { csvConverter } from '../../utils';
+import { Row } from '../../types/row.types';
 
 export const Dashboard = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<Row[]>([]);
 
   useEffect(() => {
     fetch('./frontend-data.csv')
