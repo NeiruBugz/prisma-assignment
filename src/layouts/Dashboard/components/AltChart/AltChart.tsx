@@ -15,8 +15,6 @@ export const AltChart: FC<{ data: Row[]; filterDate: string; width: number; spli
     setChart(getAltChartData(data, filterDate, splicedTo));
   }, [data, filterDate, splicedTo]);
 
-  console.log(chart);
-
   return chart !== undefined ? (
     <Chart options={chart} series={chart?.series} type="line" width={width} height={400} />
   ) : (

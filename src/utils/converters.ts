@@ -35,13 +35,15 @@ export const getChartData = (nastyData: Row[], filter: string): ChartData[] => {
   });
 };
 
-export const getAltChartData = (csvData: Row[], filter: string, splicedTo: number): any => {
+export const getAltChartData = (csvData: Row[], filter: string, splicedTo?: number): any => {
   const filteredData = csvData.filter((row: Row) => row.date === filter).splice(0, splicedTo);
   const installs = filteredData.map((row: Row) => Number(row.installs));
   const trials = filteredData.map((row: Row) => Number(row.trials));
   return {
+    title: {
+      text: 'Install/Trials',
+    },
     chart: {
-      id: 'Install/Trials',
       zoom: {
         type: 'x',
         enabled: true,
