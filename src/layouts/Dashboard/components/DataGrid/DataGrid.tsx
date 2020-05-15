@@ -1,11 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import ReactDataGrid, { SortDirection } from 'react-data-grid';
-import { Row } from '../../../../types/row.types';
-import { DataColumns } from './datagrid.utils';
 
-interface GridProps<T> {
-  data: Row[];
-}
+import { Row } from '../../../../types/row.types';
+import { GridProps } from '../../../../interfaces/data.interface';
+
+import { DataColumns } from './datagrid.utils';
 
 const EmptyGrid = () => (
   <div style={{ textAlign: 'center' }}>
@@ -16,7 +15,7 @@ const EmptyGrid = () => (
   </div>
 );
 
-export const DataGrid = <T extends {}>({ data }: GridProps<T>) => {
+export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
   const [rows] = useState<Row[]>(data);
   const [[sortColumn, sortDirection], setSort] = useState<[string | keyof Row, SortDirection]>(['date', 'DESC']);
 
@@ -39,7 +38,7 @@ export const DataGrid = <T extends {}>({ data }: GridProps<T>) => {
 
   return (
     <ReactDataGrid
-      width={1024}
+      width={tableWidth}
       height={480}
       minColumnWidth={120}
       columns={DataColumns}

@@ -1,19 +1,6 @@
 import React, { FC } from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Legend,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  LineChartProps,
-} from 'recharts';
-
-interface ChartProps extends LineChartProps {
-  data: any;
-}
+import { LineChart, Line, XAxis, YAxis, Legend, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { ChartProps } from '../../../../interfaces/data.interface';
 
 export const Chart: FC<ChartProps> = ({ data, width }) => (
   <ResponsiveContainer width={width} height="40%">

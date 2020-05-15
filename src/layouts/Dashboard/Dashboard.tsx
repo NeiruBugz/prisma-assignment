@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
+
 import { DataGrid } from './components/DataGrid/DataGrid';
-import { csvConverter, getChartData } from '../../utils';
-import { ChartData, Row } from '../../types/row.types';
 import { Chart } from './components/Chart/Chart';
+
+import { csvConverter, formatDate, getChartData } from '../../utils';
+import { ChartData, Row } from '../../types/row.types';
 
 export const Dashboard = () => {
   const [data, setData] = useState<Row[]>([]);
+  const [width] = useState(1200);
   const [chartData, setChartData] = useState<ChartData[]>();
   const [filterDate] = useState('2019-12-31');
 
@@ -14,7 +17,7 @@ export const Dashboard = () => {
       .then((response) => response.text())
       .then((result) => {
         setData(csvConverter(result));
-        setChartData(getChartData(csvConverter(result), filterDate).slice(0, 100));
+        setChartData(getChartData(csvConverter(result), filterDate));
       })
       .catch((error) => {
         setData([]);
@@ -28,10 +31,10 @@ export const Dashboard = () => {
         <>
           <h2>
             Chart data for &nbsp;
-            {new Date(filterDate).toLocaleString()}
+            {formatDate(filterDate)}
           </h2>
-          <Chart data={chartData} width={1024} />
-          <DataGrid data={data} />
+          <Chart data={chartData} width={width} />
+          <DataGrid data={data} tableWidth={width} />
         </>
       ) : (
         <svg
@@ -47,7 +50,7 @@ export const Dashboard = () => {
           height={128}
         >
           <path
-            fill="#00ADEE"
+            fill="#000"
             d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
           >
             <animateTransform
