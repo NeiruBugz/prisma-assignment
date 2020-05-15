@@ -7,7 +7,9 @@ export default {
   component: Button,
 };
 
-export const Text = () => <Button onClick={action('clicked')} label="Hello Button" />;
+export const Text = () => (
+  <Button onClick={action('clicked')} label="Hello Button" className="datagrid__button base-button" />
+);
 
 export const Emoji = () => {
   const label = (

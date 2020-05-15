@@ -1,8 +1,4 @@
 import React from 'react';
-
-import { MenuLink } from '../MenuLink';
-
-import { mockLinks } from './sidebar.mock';
 import logo from '../../assets/logo.svg';
 
 export const Sidebar = () => {

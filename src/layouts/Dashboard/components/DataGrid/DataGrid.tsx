@@ -20,6 +20,8 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
   const [rows] = useState<Row[]>(data);
   const [[sortColumn, sortDirection], setSort] = useState<[string | keyof Row, SortDirection]>(['date', 'DESC']);
   const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [enableFilters, setFiltersEnabled] = useState(true);
+  const [disableButton, setButtonDisabled] = useState(false);
 
   const handleRowsSort = useCallback((columnKey: string | keyof Row, direction: SortDirection) => {
     setSort([columnKey, direction]);
@@ -38,12 +40,23 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
     return sortDirection === 'DESC' ? newSortedRows.reverse() : newSortedRows;
   }, [rows, sortColumn, sortDirection]);
 
-  const clearFilters = useCallback(() => setFilters(clearedFilters), []);
+  const clearFilters = useCallback(() => {
+    setFilters(clearedFilters);
+    setButtonDisabled(true);
+  }, []);
+
+  const toggleFilters = useCallback(() => setFiltersEnabled(!enableFilters), [enableFilters]);
 
   return (
     <>
       <section className="datagrid__controls">
-        <Button label="Clear filters" onClick={clearFilters} />
+        <Button
+          label="Clear filters"
+          onClick={clearFilters}
+          className="datagrid__button base-button"
+          disabled={disableButton}
+        />
+        <Button label="Toggle filters" onClick={toggleFilters} className="datagrid__button base-button" />
       </section>
       <ReactDataGrid
         width={tableWidth}
@@ -55,7 +68,7 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
         sortColumn={sortColumn}
         onSort={(sortedColumn, direction) => handleRowsSort(sortedColumn, direction)}
         emptyRowsRenderer={EmptyGrid}
-        enableFilters
+        enableFilters={enableFilters}
         filters={filters}
         onFiltersChange={setFilters}
       />

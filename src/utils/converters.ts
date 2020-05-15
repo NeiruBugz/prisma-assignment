@@ -10,16 +10,17 @@ export const csvConverter = (csv: string): Row[] => {
   headers = headers.map((header) => header.match(/\w+/)).flat();
 
   for (let i = 1; i < lines.length - 1; i++) {
-    const obj: any = {};
+    const obj: Row = {} as Row;
     const currentLine = lines[i].split(',');
+
     for (let j = 0; j < headers?.length; j++) {
-      obj[headers[j]] = currentLine[j]?.replace(/['"]+/g, '');
+      obj[headers[j] as keyof Row] = currentLine[j]?.replace(/['"]+/g, '');
     }
 
     result.push(computeConversion(obj));
   }
 
-  return result;
+  return result.splice(0, 10000);
 };
 
 export const getChartData = (nastyData: Row[], filter: string): ChartData[] => {
@@ -32,3 +33,5 @@ export const getChartData = (nastyData: Row[], filter: string): ChartData[] => {
     };
   });
 };
+
+export const getStateFilterOptions = (csvData: Row[]) => Array.from(new Set([...csvData.map((row) => row.state)]));
