@@ -1,9 +1,9 @@
 import { ChartData, Row } from '../types/row.types';
 
-const computeConversion = (obj: any): Row =>
-  Object.assign(obj, { conversion: (Number(obj.trials) / Number(obj.installs)).toFixed(2) });
-
 export const csvConverter = (csv: string): Row[] => {
+  const computeConversion = (obj: Row): Row =>
+    Object.assign(obj, { conversion: (Number(obj.trials) / Number(obj.installs)).toFixed(2) });
+
   const lines = csv.split('\n');
   const result: any = [];
   let headers: (string | any)[] = lines[0].split(',');
@@ -20,7 +20,7 @@ export const csvConverter = (csv: string): Row[] => {
     result.push(computeConversion(obj));
   }
 
-  return result.splice(0, 10000);
+  return result;
 };
 
 export const getChartData = (nastyData: Row[], filter: string): ChartData[] => {
@@ -33,5 +33,3 @@ export const getChartData = (nastyData: Row[], filter: string): ChartData[] => {
     };
   });
 };
-
-export const getStateFilterOptions = (csvData: Row[]) => Array.from(new Set([...csvData.map((row) => row.state)]));

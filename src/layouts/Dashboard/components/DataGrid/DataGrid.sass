@@ -2,16 +2,16 @@
   margin: 16px 0
 
 .datagrid__button
-  border: 1px solid #000
-  background-color: #000
-  color: #fff
-  margin-right: 16px
+  background-color: #fff
+  color: #000
+  font-weight: 600
+  margin-right: 32px
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1)
+  transition: all 0.3s ease 0s
 
   &:hover
     color: #000
     background-color: #fff
-
-.datagrid__button[disabled]
-    cursor: not-allowed
-    background-color: lighten(#000, 20%)
+    transform: translateY(-2px)
+    box-shadow: 0 10px 16px rgba(61, 69, 65, 0.4)
 

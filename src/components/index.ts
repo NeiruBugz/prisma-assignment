@@ -1,3 +1,3 @@
 export * from './Button';
-export * from './MenuLink';
 export * from './Sidebar';
+export * from './Loader/Loader';
