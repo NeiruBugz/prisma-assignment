@@ -1,30 +1,8 @@
-import React from 'react';
-import { Column, FilterRendererProps, FormatterProps } from 'react-data-grid';
+import { Column } from 'react-data-grid';
 
 import { Row } from '../../../../types/row.types';
-
-import { formatDate } from '../../../../utils';
-
-const IndexFormatter: React.ComponentType<FormatterProps> = ({ rowIdx }) => <>{rowIdx + 1}</>;
-
-const PercentFormatter: React.ComponentType<FormatterProps> = ({ row, column }) => {
-  const data = row[column.key] ? `${row[column.key]}%` : '-';
-  return <span>{data}</span>;
-};
-
-const DateFormatter: React.ComponentType<FormatterProps> = ({ row, column }) => (
-  <span>{row[column.key] ? formatDate(row[column.key]) : '-'}</span>
-);
-
-const DigitFormatter: React.ComponentType<FormatterProps> = ({ row, column }) => <span>{Number(row[column.key])}</span>;
-
-const DefaultFilterRenderer: React.ComponentType<FilterRendererProps<any>> = ({ value, onChange }) => {
-  return (
-    <div className="rdg-filter-container">
-      <input className="rdg-filter" value={value as string} onChange={(e) => onChange(e.target.value)} />
-    </div>
-  );
-};
+import { DateFormatter, DigitFormatter, IndexFormatter, PercentFormatter } from './datagrid.formatters';
+import { DefaultFilterRenderer } from './datagrid.filters';
 
 const applyDefaultColumnsParams = <T extends {}>(columns: Column<T>[]): Column<T>[] => {
   const defaultProps: Partial<Column<T>> = {

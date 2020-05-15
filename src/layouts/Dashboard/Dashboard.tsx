@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { DataGrid } from './components/DataGrid/DataGrid';
 import { Chart } from './components/Chart/Chart';
