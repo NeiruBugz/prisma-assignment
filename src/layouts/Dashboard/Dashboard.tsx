@@ -8,7 +8,7 @@ import { ChartData, Row } from '../../types/row.types';
 
 export const Dashboard = () => {
   const [data, setData] = useState<Row[]>([]);
-  const [width] = useState(1200);
+  const [width] = useState(1440);
   const [chartData, setChartData] = useState<ChartData[]>();
   const [filterDate] = useState('2019-12-31');
 
@@ -33,7 +33,7 @@ export const Dashboard = () => {
             Chart data for &nbsp;
             {formatDate(filterDate)}
           </h2>
-          <Chart data={chartData} width={width} />
+          <Chart chartData={chartData} width={width} />
           <DataGrid data={data} tableWidth={width} />
         </>
       ) : (

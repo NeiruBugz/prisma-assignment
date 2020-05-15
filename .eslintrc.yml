@@ -44,5 +44,6 @@ rules: {
   ],
   'import/prefer-default-export': 0,
   'react/prop-types': 0,
-  'no-plusplus': 0
+  'no-plusplus': 0,
+  'react/display-name': 0,
 }

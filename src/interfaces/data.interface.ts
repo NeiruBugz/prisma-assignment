@@ -7,5 +7,5 @@ export interface GridProps<T> {
 }
 
 export interface ChartProps extends LineChartProps {
-  data: ChartData[] | undefined;
+  chartData: ChartData[] | undefined;
 }
