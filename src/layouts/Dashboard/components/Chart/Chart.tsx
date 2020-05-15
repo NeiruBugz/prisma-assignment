@@ -4,12 +4,11 @@ import { ChartProps } from '../../../../interfaces/data.interface';
 import { ChartData } from '../../../../types/row.types';
 import { getChartData } from '../../../../utils';
 
-export const Chart: FC<ChartProps> = ({ chartData, width, date }) => {
+export const Chart: FC<ChartProps> = ({ chartData, width, date, splicedTo }) => {
   const [chart, setChart] = useState<ChartData[]>();
-
   useEffect(() => {
-    setChart(getChartData(chartData, date).splice(0, 100));
-  }, [chartData, date]);
+    setChart(getChartData(chartData, date).splice(0, splicedTo === 0 ? 100 : splicedTo));
+  }, [chartData, date, splicedTo]);
 
   return (
     <ResponsiveContainer width={width} height="40%">

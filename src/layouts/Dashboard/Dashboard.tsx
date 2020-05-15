@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { DataGrid } from './components/DataGrid/DataGrid';
 import { Chart } from './components/Chart/Chart';
 
 import { csvConverter, formatDate } from '../../utils';
 import { Row } from '../../types/row.types';
-import { Loader } from '../../components';
+import { Input, Loader } from '../../components';
 
 export const Dashboard = () => {
   const [data, setData] = useState<Row[]>([]);
@@ -25,17 +25,28 @@ export const Dashboard = () => {
       });
   }, []);
 
+  const handleInputChange = async (evt: React.SyntheticEvent<HTMLInputElement>) => {
+    setSpliceTo(Number(evt.currentTarget.value));
+  };
+
   return (
     <section className="dashboard">
       {data?.length ? (
         <>
           <h2>
-            Chart data for &nbsp;
-            {formatDate(filterDate)}
-            &nbsp; spliced from 0 to&nbsp;
-            {spliceTo}
+            Chart data for {formatDate(filterDate)} spliced from 0 to&nbsp;{spliceTo === 0 ? 100 : spliceTo} (max:
+            {data?.length})
           </h2>
-          <Chart chartData={data} width={width} date={filterDate} />
+          <Input
+            value={spliceTo}
+            onChange={handleInputChange}
+            label="To change data size enter a number: "
+            type="number"
+            className="dashboard__input input--base"
+            placeholder="100"
+            defaultValue={spliceTo}
+          />
+          <Chart chartData={data} width={width} date={filterDate} splicedTo={spliceTo} />
           <DataGrid data={data} tableWidth={width} customFilters={[]} />
         </>
       ) : (

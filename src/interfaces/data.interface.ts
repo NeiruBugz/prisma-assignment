@@ -10,4 +10,5 @@ export interface GridProps<T> {
 export interface ChartProps extends LineChartProps {
   chartData: Row[];
   date: string;
+  splicedTo: number;
 }
