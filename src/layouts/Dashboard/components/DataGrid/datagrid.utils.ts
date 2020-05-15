@@ -17,7 +17,7 @@ const applyDefaultColumnsParams = <T extends {}>(columns: Column<T>[]): Column<T
     name: '№',
     formatter: IndexFormatter,
     sortable: true,
-    width: '40px',
+    width: 10,
   });
 
   return enrichedColumns;
@@ -27,42 +27,38 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
   {
     key: 'date',
     name: 'Date',
-    width: '200px',
     filterRenderer: DefaultFilterRenderer,
     formatter: DateFormatter,
   },
   {
     key: 'state',
     name: 'State',
-    width: '200px',
     filterRenderer: DefaultFilterRenderer,
   },
   {
     key: 'city',
     name: 'City',
-    width: '200px',
     filterRenderer: DefaultFilterRenderer,
   },
   {
     key: 'installs',
     name: 'Installs',
-    width: '200px',
     filterRenderer: DefaultFilterRenderer,
     formatter: DigitFormatter,
+    width: 80,
   },
   {
     key: 'trials',
     name: 'Trials',
-    width: '200px',
     filterRenderer: DefaultFilterRenderer,
     formatter: DigitFormatter,
+    width: 80,
   },
   {
     key: 'conversion',
     name: 'Conversion',
     formatter: PercentFormatter,
     filterRenderer: DefaultFilterRenderer,
-    width: '200px',
   },
 ]);
 

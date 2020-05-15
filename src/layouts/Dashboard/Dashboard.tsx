@@ -6,10 +6,11 @@ import { Chart } from './components/Chart/Chart';
 import { csvConverter, formatDate } from '../../utils';
 import { Row } from '../../types/row.types';
 import { Input, Loader } from '../../components';
+import { AltChart } from './components/AltChart/AltChart';
 
 export const Dashboard = () => {
   const [data, setData] = useState<Row[]>([]);
-  const [width] = useState(1440);
+  const [width] = useState(1024);
   const [filterDate] = useState('2019-12-31');
   const [spliceTo, setSpliceTo] = useState(100);
 
@@ -46,7 +47,8 @@ export const Dashboard = () => {
             placeholder="100"
             defaultValue={spliceTo}
           />
-          <Chart chartData={data} width={width} date={filterDate} splicedTo={spliceTo} />
+          {/* <Chart chartData={data}  date={filterDate}  /> */}
+          <AltChart data={data} filterDate={filterDate} width={width} splicedTo={spliceTo} />
           <DataGrid data={data} tableWidth={width} customFilters={[]} />
         </>
       ) : (

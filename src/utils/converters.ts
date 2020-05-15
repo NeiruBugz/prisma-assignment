@@ -1,4 +1,5 @@
 import { ChartData, Row } from '../types/row.types';
+import { formatDate } from './formatters';
 
 export const csvConverter = (csv: string): Row[] => {
   const computeConversion = (obj: Row): Row =>
@@ -32,4 +33,56 @@ export const getChartData = (nastyData: Row[], filter: string): ChartData[] => {
       date,
     };
   });
+};
+
+export const getAltChartData = (csvData: Row[], filter: string, splicedTo: number): any => {
+  const filteredData = csvData.filter((row: Row) => row.date === filter).splice(0, splicedTo);
+  const installs = filteredData.map((row: Row) => Number(row.installs));
+  const trials = filteredData.map((row: Row) => Number(row.trials));
+  return {
+    chart: {
+      id: 'Install/Trials',
+      zoom: {
+        type: 'x',
+        enabled: true,
+        autoScaleYaxis: true,
+      },
+      toolbar: {
+        autoSelected: 'zoom',
+        tools: {
+          selection: false,
+          pan: false,
+        },
+      },
+    },
+    xaxis: {
+      categories: new Array(splicedTo).fill(formatDate(filter)),
+    },
+    series: [
+      {
+        name: 'installs',
+        data: installs,
+      },
+      {
+        name: 'trials',
+        data: trials,
+      },
+    ],
+    tooltip: {
+      shared: true,
+      onDatasetHover: {
+        highlightDataSeries: true,
+      },
+      x: {
+        title: {
+          formatter: (seriesName: any) => seriesName,
+        },
+      },
+      y: {
+        title: {
+          formatter: (seriesName: any) => seriesName,
+        },
+      },
+    },
+  };
 };

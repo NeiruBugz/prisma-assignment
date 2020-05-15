@@ -10,6 +10,8 @@ export const Chart: FC<ChartProps> = ({ chartData, width, date, splicedTo }) => 
     setChart(getChartData(chartData, date).splice(0, splicedTo === 0 ? 100 : splicedTo));
   }, [chartData, date, splicedTo]);
 
+  console.log(chart);
+
   return (
     <ResponsiveContainer width={width} height="40%">
       <LineChart width={width} height={400} data={chart}>

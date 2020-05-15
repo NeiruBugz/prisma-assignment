@@ -61,7 +61,6 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
       <ReactDataGrid
         width={tableWidth}
         height={480}
-        minColumnWidth={120}
         columns={DataColumns}
         rows={sortedRows}
         sortDirection={sortDirection}
