@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { FilterRendererProps } from 'react-data-grid';
 
-export const DefaultFilterRenderer: React.ComponentType<FilterRendererProps<any>> = ({
+export const DefaultFilterRenderer: ComponentType<FilterRendererProps<any>> = ({
   value,
   onChange,
   column: { key, width },
@@ -9,6 +9,8 @@ export const DefaultFilterRenderer: React.ComponentType<FilterRendererProps<any>
   let customWidth = String(width);
   if (key === 'installs' || key === 'trials') {
     customWidth = '64px';
+  } else if (key === 'conversion') {
+    customWidth = '100px';
   }
   return (
     <div className="rdg-filter-container">

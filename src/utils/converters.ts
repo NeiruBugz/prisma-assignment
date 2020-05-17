@@ -22,11 +22,21 @@ export const csvConverter = (csv: string): Row[] => {
     const currentLine = lines[i].split(',');
 
     headers.map((header: string, idx) => {
-      // @ts-ignore
-      obj[header] =
-        header === 'trials' || header === 'installs'
-          ? Number(currentLine[idx]?.replace(/['"]+/g, ''))
-          : currentLine[idx]?.replace(/['"]+/g, '');
+      switch (header) {
+        case 'date':
+          obj[header] = formatDate(currentLine[idx]?.replace(/['"]+/g, ''));
+          break;
+        case 'installs':
+          obj[header] = Number(currentLine[idx]?.replace(/['"]+/g, ''));
+          break;
+        case 'trials':
+          obj[header] = Number(currentLine[idx]?.replace(/['"]+/g, ''));
+          break;
+        default:
+          // @ts-ignore
+          obj[header] = currentLine[idx]?.replace(/['"]+/g, '');
+          break;
+      }
     });
 
     result.push(computeConversion(obj));
@@ -36,9 +46,9 @@ export const csvConverter = (csv: string): Row[] => {
 };
 
 export const getAltChartData = (csvData: Row[], filter: string, splicedTo?: number, width?: number): Options => {
-  const filteredData = csvData.filter((row: Row) => row.date === filter).splice(0, splicedTo);
-  const installs = filteredData.map((row: Row) => Number(row.installs));
-  const trials = filteredData.map((row: Row) => Number(row.trials));
+  const filteredData = csvData.filter(({ date }: Row) => date === filter).splice(0, splicedTo);
+  const installsData = filteredData.map(({ installs }: Row) => installs);
+  const trialsData = filteredData.map(({ trials }: Row) => trials);
   return {
     title: {
       text: 'Install/Trials',
@@ -50,19 +60,19 @@ export const getAltChartData = (csvData: Row[], filter: string, splicedTo?: numb
     },
     xAxis: {
       title: {
-        text: `${formatDate(filter)}`,
+        text: filter,
       },
     },
     series: [
       {
         type: 'line',
         name: 'installs',
-        data: installs,
+        data: installsData,
       },
       {
         type: 'line',
         name: 'trials',
-        data: trials,
+        data: trialsData,
       },
     ],
   };

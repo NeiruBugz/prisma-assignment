@@ -10,7 +10,7 @@ import { Row } from '../../types/row.types';
 export const Dashboard = () => {
   const [data, setData] = useState<Row[]>([]);
   const [width] = useState(1024);
-  const [filterDate] = useState('2019-12-31');
+  const [filterDate] = useState('31.12.2019');
   const [spliceTo, setSpliceTo] = useState(100);
 
   useEffect(() => {

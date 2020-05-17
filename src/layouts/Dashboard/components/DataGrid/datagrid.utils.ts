@@ -28,7 +28,6 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
     key: 'date',
     name: 'Date',
     filterRenderer: DefaultFilterRenderer,
-    formatter: DateFormatter,
   },
   {
     key: 'state',
@@ -59,11 +58,12 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
     name: 'Conversion',
     formatter: PercentFormatter,
     filterRenderer: DefaultFilterRenderer,
+    width: 120,
   },
 ]);
 
 export const initialFilters = {
-  date: '2019-12-31',
+  date: '31.12.2019',
   state: '',
   city: '',
   installs: '',
