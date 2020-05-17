@@ -1,5 +1,4 @@
-import { LineChartProps } from 'recharts';
-import { ChartData, Row } from '../types/row.types';
+import { Row } from '../types/row.types';
 
 export interface GridProps<T> {
   data: Row[];
@@ -7,8 +6,9 @@ export interface GridProps<T> {
   customFilters: any[];
 }
 
-export interface ChartProps extends LineChartProps {
+export interface ChartProps {
   chartData: Row[];
   date: string;
-  splicedTo: number;
+  splicedTo?: number;
+  width?: number;
 }

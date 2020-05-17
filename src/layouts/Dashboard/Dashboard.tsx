@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+import { Input, Loader } from '../../components';
+import { HighChart } from './components/HighChart/HighChart';
 import { DataGrid } from './components/DataGrid/DataGrid';
-import { Chart } from './components/Chart/Chart';
 
 import { csvConverter, formatDate } from '../../utils';
 import { Row } from '../../types/row.types';
-import { Input, Loader } from '../../components';
-import { AltChart } from './components/AltChart/AltChart';
-import { HighChart } from './components/HighChart/HighChart';
 
 export const Dashboard = () => {
   const [data, setData] = useState<Row[]>([]);
@@ -48,9 +46,7 @@ export const Dashboard = () => {
             placeholder="100"
             defaultValue={spliceTo}
           />
-          {/* <Chart chartData={data}  date={filterDate}  /> */}
-          {/* <AltChart data={data} filterDate={filterDate} width={width} splicedTo={spliceTo} /> */}
-          <HighChart data={data} filterDate={filterDate} width={width} splicedTo={spliceTo} />
+          <HighChart chartData={data} date={filterDate} width={width} splicedTo={spliceTo} />
           <DataGrid data={data} tableWidth={width} customFilters={[]} />
         </>
       ) : (
