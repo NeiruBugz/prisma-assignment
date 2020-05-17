@@ -1,11 +1,21 @@
 export type Row = {
   state: string;
   city: string;
-  installs: string;
-  trials: string;
+  installs: number;
+  trials: number;
   date: string;
-  conversion?: string;
+  conversion?: number;
 };
+
+export enum GridHeaders {
+  'state',
+  'city',
+  'installs',
+  'trials',
+  'date',
+}
+
+export type DataGridHeaders = string[];
 
 export type ChartData = {
   installs: string;

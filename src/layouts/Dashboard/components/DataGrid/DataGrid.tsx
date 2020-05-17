@@ -20,7 +20,7 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
   const [rows] = useState<Row[]>(data);
   const [[sortColumn, sortDirection], setSort] = useState<[string | keyof Row, SortDirection]>(['date', 'DESC']);
   const [filters, setFilters] = useState<Filters>(initialFilters);
-  const [enableFilters, setFiltersEnabled] = useState(true);
+  const [enableFilters, setFiltersEnabled] = useState(false);
   const [disableButton, setButtonDisabled] = useState(false);
 
   const handleRowsSort = useCallback((columnKey: string | keyof Row, direction: SortDirection) => {
@@ -45,6 +45,18 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
     setButtonDisabled(true);
   }, []);
 
+  const filteredRows = useMemo(() => {
+    return sortedRows.filter((r) => {
+      return (
+        (filters.city ? r.city.includes(filters.city) : true) &&
+        (filters.state ? r.state === filters.state : true) &&
+        (filters.date ? r.date === filters.date : true) &&
+        (filters.installs ? r.installs === filters.installs : true) &&
+        (filters.trials ? r.trials === filters.trials : true)
+      );
+    });
+  }, [sortedRows, filters.city, filters.state, filters.date, filters.installs, filters.trials]);
+
   const toggleFilters = useCallback(() => setFiltersEnabled(!enableFilters), [enableFilters]);
 
   return (
@@ -60,9 +72,9 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
       </section>
       <ReactDataGrid
         width={tableWidth}
-        height={480}
+        height={525}
         columns={DataColumns}
-        rows={sortedRows}
+        rows={filteredRows}
         sortDirection={sortDirection}
         sortColumn={sortColumn}
         onSort={(sortedColumn, direction) => handleRowsSort(sortedColumn, direction)}
