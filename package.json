@@ -17,13 +17,14 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "prebuild": "rimraf build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "predeploy": "react-scripts build",
+    "predeploy": "yarn run build",
     "deploy": "firebase deploy"
   },
   "eslintConfig": {
