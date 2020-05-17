@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Input, Loader } from '../../components';
-import { HighChart } from './components/HighChart/HighChart';
+import { Chart } from './components/Chart/Chart';
 import { DataGrid } from './components/DataGrid/DataGrid';
 
 import { csvConverter, formatDate } from '../../utils';
@@ -46,7 +46,7 @@ export const Dashboard = () => {
             placeholder="100"
             defaultValue={spliceTo}
           />
-          <HighChart chartData={data} date={filterDate} width={width} splicedTo={spliceTo} />
+          <Chart chartData={data} date={filterDate} width={width} splicedTo={spliceTo} />
           <DataGrid data={data} tableWidth={width} customFilters={[]} />
         </>
       ) : (

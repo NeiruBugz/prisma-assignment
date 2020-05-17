@@ -4,7 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { getAltChartData } from '../../../../utils';
 import { ChartProps } from '../../../../interfaces/data.interface';
 
-export const HighChart: FC<ChartProps> = ({ chartData, date, width, splicedTo }) => {
+export const Chart: FC<ChartProps> = ({ chartData, date, width, splicedTo }) => {
   const [chart, setChart] = useState();
   useEffect(() => {
     setChart(getAltChartData(chartData, date, splicedTo));
