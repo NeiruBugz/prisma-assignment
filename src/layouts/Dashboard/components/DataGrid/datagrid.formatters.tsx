@@ -5,8 +5,7 @@ import { formatDate } from '../../../../utils';
 export const IndexFormatter: React.ComponentType<FormatterProps> = ({ rowIdx }) => <>{rowIdx + 1}</>;
 
 export const PercentFormatter: React.ComponentType<FormatterProps> = ({ row, column }) => {
-  const data = row[column.key] ? `${row[column.key]}%` : '-';
-  return <span>{data}</span>;
+  return <span>{row[column.key] ? `${row[column.key]}%` : '-'}</span>;
 };
 
 export const DateFormatter: React.ComponentType<FormatterProps> = ({ row, column }) => (
@@ -14,5 +13,5 @@ export const DateFormatter: React.ComponentType<FormatterProps> = ({ row, column
 );
 
 export const DigitFormatter: React.ComponentType<FormatterProps> = ({ row, column }) => (
-  <span>{Number(row[column.key])}</span>
+  <span>{Number(row[column.key]) === 0 ? '-' : Number(row[column.key])}</span>
 );
