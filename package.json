@@ -1,6 +1,14 @@
 {
   "name": "prisma-assignment",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "homepage": "https://prisma-assignment.web.app/",
+  "author" : {
+    "email": "badiullin.nail@gmail.com",
+    "name": "Badiullin Nail"
+  },
+  "engines": {
+    "node" : ">=13.11.0"
+  },
   "private": true,
   "dependencies": {
     "highcharts": "^8.1.0",
