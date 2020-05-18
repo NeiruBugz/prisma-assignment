@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Sidebar } from './components/Sidebar';
-import { Dashboard } from './layouts/Dashboard';
+import { Sidebar } from '../../components/Sidebar';
+import { Dashboard } from '../Dashboard';
 
 export const App: React.FC<{}> = () => {
   return (
