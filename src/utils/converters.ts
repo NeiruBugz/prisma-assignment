@@ -1,5 +1,5 @@
 import { Options } from 'highcharts';
-import { Row } from '../types/row.types';
+import { Row } from '../types/data.types';
 import { normalizeDate } from './formatters';
 
 export const csvConverter = (csv: string): Row[] => {
@@ -46,7 +46,8 @@ export const csvConverter = (csv: string): Row[] => {
 };
 
 export const getAltChartData = (csvData: Row[], filter: string, splicedTo?: number, width?: number): Options => {
-  const filteredData = csvData.filter(({ date }: Row) => date === filter).splice(0, splicedTo);
+  const filteredData = csvData.filter(({ date }: Row) => date === normalizeDate(filter)).splice(0, splicedTo);
+  debugger;
   const installsData = filteredData.map(({ installs }: Row) => installs);
   const trialsData = filteredData.map(({ trials }: Row) => trials);
   return {
