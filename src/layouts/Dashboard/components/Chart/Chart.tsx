@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import Highcharts, { Options } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+
 import { getAltChartData } from '../../../../utils';
-import { ChartProps } from '../../../../interfaces/data.interface';
+import { ChartProps } from '../../../../types/data.types';
 
 export const Chart: FC<ChartProps> = ({ chartData, date, width, splicedTo }) => {
   const [chart, setChart] = useState<Options>({});

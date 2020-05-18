@@ -1,6 +1,6 @@
 import { Column } from 'react-data-grid';
 
-import { Row } from '../../../../types/row.types';
+import { Row } from '../../../../types/data.types';
 import { DigitFormatter, IndexFormatter, PercentFormatter } from './datagrid.formatters';
 import { DefaultFilterRenderer } from './datagrid.filters';
 

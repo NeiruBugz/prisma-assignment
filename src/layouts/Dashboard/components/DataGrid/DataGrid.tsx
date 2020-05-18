@@ -1,13 +1,13 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import ReactDataGrid, { Filters, SortDirection } from 'react-data-grid';
 
-import { Row } from '../../../../types/row.types';
-import { GridProps } from '../../../../interfaces/data.interface';
+import { Input } from '../../../../components/Input';
+import { Button } from '../../../../components/Button';
+
+import { GridProps, Row } from '../../../../types/data.types';
 
 import { clearedFilters, DataColumns, initialFilters } from './datagrid.utils';
-import { Button } from '../../../../components/Button';
 import { stringToDateStringParse } from '../../../../utils';
-import { Input } from '../../../../components/Input';
 
 const EmptyGrid = () => (
   <div style={{ textAlign: 'center' }}>
