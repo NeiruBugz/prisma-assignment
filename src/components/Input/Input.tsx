@@ -10,9 +10,17 @@ export const Input: FC<InputTypes> = ({
   className = 'input--base',
   placeholder,
   defaultValue,
+  type = 'text',
 }) => (
   <label htmlFor={id} className={labelClassName}>
     {label}
-    <input id={id} className={className} placeholder={placeholder} onChange={onChange} defaultValue={defaultValue} />
+    <input
+      id={id}
+      className={className}
+      placeholder={placeholder}
+      onChange={onChange}
+      defaultValue={defaultValue}
+      type={type}
+    />
   </label>
 );

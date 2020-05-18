@@ -2,7 +2,7 @@ import { Column } from 'react-data-grid';
 
 import { Row } from '../../../../types/row.types';
 import { DigitFormatter, IndexFormatter, PercentFormatter } from './datagrid.formatters';
-import { DateFilterRenderer, DefaultFilterRenderer } from './datagrid.filters';
+import { DefaultFilterRenderer } from './datagrid.filters';
 
 const applyDefaultColumnsParams = <T extends {}>(columns: Column<T>[]): Column<T>[] => {
   const defaultProps: Partial<Column<T>> = {
@@ -27,7 +27,6 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
   {
     key: 'date',
     name: 'Date',
-    filterRenderer: DateFilterRenderer,
   },
   {
     key: 'state',
@@ -63,7 +62,8 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
 ]);
 
 export const initialFilters = {
-  date: ['29.12.2019', '31.12.2019'],
+  startDate: '31.12.2019',
+  endDate: '31.12.2019',
   state: '',
   city: '',
   installs: '',
@@ -72,7 +72,8 @@ export const initialFilters = {
 };
 
 export const clearedFilters = {
-  date: ['', ''],
+  startDate: '',
+  endDate: '',
   state: '',
   city: '',
   installs: '',

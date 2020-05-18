@@ -7,6 +7,7 @@ import { GridProps } from '../../../../interfaces/data.interface';
 import { clearedFilters, DataColumns, initialFilters } from './datagrid.utils';
 import { Button } from '../../../../components/Button';
 import { stringToDateStringParse } from '../../../../utils';
+import { Input } from '../../../../components/Input';
 
 const EmptyGrid = () => (
   <div style={{ textAlign: 'center' }}>
@@ -19,10 +20,12 @@ const EmptyGrid = () => (
 
 export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
   const [rows] = useState<Row[]>(data);
-  const [[sortColumn, sortDirection], setSort] = useState<[string | keyof Row, SortDirection]>(['date', 'DESC']);
+  const [[sortColumn, sortDirection], setSort] = useState<[string | keyof Row, SortDirection]>(['date', 'ASC']);
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [enableFilters, setFiltersEnabled] = useState(true);
   const [disableButton, setButtonDisabled] = useState(false);
+  const [startDate, setStartDate] = useState<string>('2019-12-31');
+  const [endDate, setEndDate] = useState<string>('2019-12-31');
 
   const handleRowsSort = useCallback((columnKey: string | keyof Row, direction: SortDirection) => {
     setSort([columnKey, direction]);
@@ -43,7 +46,6 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
     }
 
     const compareDates = (rowDate: string, fromDate: string, toDate: string) => {
-      debugger;
       return (
         new Date(stringToDateStringParse(rowDate)) >= new Date(stringToDateStringParse(fromDate)) &&
         new Date(stringToDateStringParse(rowDate)) <= new Date(stringToDateStringParse(toDate))
@@ -54,18 +56,36 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
       return (
         (filters.city ? r.city.toLowerCase().includes(filters.city.toLowerCase()) : true) &&
         (filters.state ? r.state.toLowerCase().includes(filters.state.toLowerCase()) : true) &&
-        (filters.date ? compareDates(r.date, filters.date[0], filters.date[1]) : true) &&
+        (startDate || endDate ? compareDates(r.date, startDate, endDate) : true) &&
         (filters.installs ? r.installs === Number(filters.installs) : true) &&
         (filters.trials ? r.trials === Number(filters.trials) : true)
       );
     });
-  }, [sortDirection, rows, sortColumn, filters.city, filters.state, filters.date, filters.installs, filters.trials]);
+  }, [
+    rows,
+    sortDirection,
+    sortColumn,
+    filters.city,
+    filters.state,
+    filters.installs,
+    filters.trials,
+    startDate,
+    endDate,
+  ]);
 
   const toggleFilters = useCallback(() => setFiltersEnabled(!enableFilters), [enableFilters]);
 
   const clearFilters = useCallback(() => {
     setFilters(clearedFilters);
     setButtonDisabled(true);
+  }, []);
+
+  const handleChange = useCallback((e: React.SyntheticEvent<HTMLInputElement>) => {
+    if (e.currentTarget.id === 'startDate') {
+      setStartDate(stringToDateStringParse(e.currentTarget.value));
+    } else {
+      setEndDate(stringToDateStringParse(e.currentTarget.value));
+    }
   }, []);
 
   return (
@@ -78,6 +98,24 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
           disabled={disableButton}
         />
         <Button label="Toggle filters" onClick={toggleFilters} className="datagrid__button base-button" />
+        <Input
+          className="datagrid__input datagrid__input--filter"
+          value={startDate}
+          onChange={handleChange}
+          id="startDate"
+          type="date"
+          label="From: "
+          labelClassName="datagrid__label--filter input__label"
+        />
+        <Input
+          className="datagrid__input datagrid__input--filter"
+          value={endDate}
+          onChange={handleChange}
+          id="endDate"
+          type="date"
+          label="To: "
+          labelClassName="datagrid__label--filter input__label"
+        />
       </section>
       <ReactDataGrid
         width={tableWidth}
@@ -90,8 +128,7 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
         emptyRowsRenderer={EmptyGrid}
         enableFilters={enableFilters}
         filters={filters}
-        onFiltersChange={setFilters}
-        headerFiltersHeight={80}
+        onFiltersChange={(updFilters) => setFilters(updFilters)}
       />
     </>
   );
