@@ -63,7 +63,7 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
 ]);
 
 export const initialFilters = {
-  date: '31.12.2019',
+  date: ['29.12.2019', '31.12.2019'],
   state: '',
   city: '',
   installs: '',
@@ -72,7 +72,7 @@ export const initialFilters = {
 };
 
 export const clearedFilters = {
-  date: '',
+  date: ['', ''],
   state: '',
   city: '',
   installs: '',

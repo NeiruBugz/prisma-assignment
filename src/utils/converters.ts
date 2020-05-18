@@ -1,6 +1,6 @@
 import { Options } from 'highcharts';
 import { Row } from '../types/row.types';
-import { formatDate } from './formatters';
+import { normalizeDate } from './formatters';
 
 export const csvConverter = (csv: string): Row[] => {
   const computeConversion = (obj: Row): Row =>
@@ -24,7 +24,7 @@ export const csvConverter = (csv: string): Row[] => {
     headers.map((header: string, idx) => {
       switch (header) {
         case 'date':
-          obj[header] = formatDate(currentLine[idx]?.replace(/['"]+/g, ''));
+          obj[header] = normalizeDate(currentLine[idx]?.replace(/['"]+/g, ''));
           break;
         case 'installs':
           obj[header] = Number(currentLine[idx]?.replace(/['"]+/g, ''));

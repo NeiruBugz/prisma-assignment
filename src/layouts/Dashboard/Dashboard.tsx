@@ -4,7 +4,7 @@ import { Input, Loader } from '../../components';
 import { Chart } from './components/Chart/Chart';
 import { DataGrid } from './components/DataGrid/DataGrid';
 
-import { csvConverter, formatDate } from '../../utils';
+import { csvConverter } from '../../utils';
 import { Row } from '../../types/row.types';
 
 export const Dashboard = () => {

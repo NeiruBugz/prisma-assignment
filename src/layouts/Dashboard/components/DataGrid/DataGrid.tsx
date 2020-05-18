@@ -6,6 +6,7 @@ import { GridProps } from '../../../../interfaces/data.interface';
 
 import { clearedFilters, DataColumns, initialFilters } from './datagrid.utils';
 import { Button } from '../../../../components/Button';
+import { stringToDateStringParse } from '../../../../utils';
 
 const EmptyGrid = () => (
   <div style={{ textAlign: 'center' }}>
@@ -41,11 +42,19 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
       newRows = rows;
     }
 
+    const compareDates = (rowDate: string, fromDate: string, toDate: string) => {
+      debugger;
+      return (
+        new Date(stringToDateStringParse(rowDate)) >= new Date(stringToDateStringParse(fromDate)) &&
+        new Date(stringToDateStringParse(rowDate)) <= new Date(stringToDateStringParse(toDate))
+      );
+    };
+
     return newRows.filter((r) => {
       return (
         (filters.city ? r.city.toLowerCase().includes(filters.city.toLowerCase()) : true) &&
         (filters.state ? r.state.toLowerCase().includes(filters.state.toLowerCase()) : true) &&
-        (filters.date ? r.date.includes(filters.date) : true) &&
+        (filters.date ? compareDates(r.date, filters.date[0], filters.date[1]) : true) &&
         (filters.installs ? r.installs === Number(filters.installs) : true) &&
         (filters.trials ? r.trials === Number(filters.trials) : true)
       );

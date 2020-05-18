@@ -1,5 +1,6 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useCallback, useState } from 'react';
 import { FilterRendererProps } from 'react-data-grid';
+import { stringToDateStringParse } from '../../../../utils';
 
 export const DefaultFilterRenderer: ComponentType<FilterRendererProps<any>> = ({
   value,
@@ -24,7 +25,20 @@ export const DefaultFilterRenderer: ComponentType<FilterRendererProps<any>> = ({
   );
 };
 
-export const DateFilterRenderer: ComponentType<FilterRendererProps<any>> = ({ value, onChange }) => {
+export const DateFilterRenderer: ComponentType<FilterRendererProps<any>> = ({ value }) => {
+  const [first, second] = value as string[];
+  const [startDate, setStartDate] = useState<string>(first);
+  const [endDate, setEndDate] = useState<string>(second);
+
+  const handleChange = useCallback((e: React.SyntheticEvent<HTMLInputElement>) => {
+    if (e.currentTarget.id === 'startDate') {
+      setStartDate(stringToDateStringParse(e.currentTarget.value));
+    } else {
+      setEndDate(stringToDateStringParse(e.currentTarget.value));
+    }
+  }, []);
+
+  debugger;
   return (
     <div className="rdg-filter-container">
       <section className="datagrid__filters datagrid__filters--date">
@@ -32,18 +46,20 @@ export const DateFilterRenderer: ComponentType<FilterRendererProps<any>> = ({ va
           <span>From: </span>
           <input
             className="rdg-filter filter__input--from"
-            value={value as string}
-            onChange={(e) => onChange(e.target.value)}
+            value={startDate}
+            onChange={handleChange}
             id="startDate"
+            type="date"
           />
         </div>
         <div className="label-to">
           <span>To:</span>
           <input
             className="rdg-filter filter__input--to"
-            value={value as string}
-            onChange={(e) => onChange(e.target.value)}
+            value={endDate}
+            onChange={handleChange}
             id="endDate"
+            type="date"
           />
         </div>
       </section>

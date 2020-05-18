@@ -1,4 +1,4 @@
-export const formatDate = (dateString: string): string => {
+export const normalizeDate = (dateString: string): string => {
   const date = new Date(dateString);
   let dd: string | number = date.getDate();
   if (dd < 10) dd = `0${dd}`;
@@ -8,3 +8,5 @@ export const formatDate = (dateString: string): string => {
 
   return `${dd}.${mm}.${yyyy}`;
 };
+
+export const stringToDateStringParse = (dateString: string): string => dateString.split('.').reverse().join('-');
