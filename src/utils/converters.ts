@@ -11,7 +11,7 @@ export const csvConverter = (csv: string): Row[] => {
     });
 
   const lines = csv ? csv.split('\n') : [];
-  const result: any = [];
+  const result: Row[] = [];
   const headers: (string | any)[] = lines[0]
     .split(',')
     .map((header) => header.match(/\w+/))
@@ -21,8 +21,14 @@ export const csvConverter = (csv: string): Row[] => {
     const obj = {} as Row;
     const currentLine = lines[i].split(',');
 
-    headers.map((header: string, idx) => {
+    headers.map((header: keyof Row, idx) => {
       switch (header) {
+        case 'state':
+          obj[header] = currentLine[idx]?.replace(/['"]+/g, '');
+          break;
+        case 'city':
+          obj[header] = currentLine[idx]?.replace(/['"]+/g, '');
+          break;
         case 'date':
           obj[header] = normalizeDate(currentLine[idx]?.replace(/['"]+/g, ''));
           break;
@@ -33,8 +39,6 @@ export const csvConverter = (csv: string): Row[] => {
           obj[header] = Number(currentLine[idx]?.replace(/['"]+/g, ''));
           break;
         default:
-          // @ts-ignore
-          obj[header] = currentLine[idx]?.replace(/['"]+/g, '');
           break;
       }
     });
@@ -47,7 +51,6 @@ export const csvConverter = (csv: string): Row[] => {
 
 export const getAltChartData = (csvData: Row[], filter: string, splicedTo?: number, width?: number): Options => {
   const filteredData = csvData.filter(({ date }: Row) => date === normalizeDate(filter)).splice(0, splicedTo);
-  debugger;
   const installsData = filteredData.map(({ installs }: Row) => installs);
   const trialsData = filteredData.map(({ trials }: Row) => trials);
   return {
@@ -67,12 +70,12 @@ export const getAltChartData = (csvData: Row[], filter: string, splicedTo?: numb
     series: [
       {
         type: 'line',
-        name: 'installs',
+        name: 'Installs',
         data: installsData,
       },
       {
         type: 'line',
-        name: 'trials',
+        name: 'Trials',
         data: trialsData,
       },
     ],

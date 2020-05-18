@@ -37,8 +37,7 @@ export const Dashboard = () => {
       {data?.length ? (
         <>
           <h2>
-            Chart data for {normalizeDate(filterDate)} spliced from 0 to&nbsp;{spliceTo === 0 ? 100 : spliceTo} (max:
-            {data?.length})
+            Chart data for {normalizeDate(filterDate)} spliced from 0 to&nbsp;{spliceTo === 0 ? 100 : spliceTo}
           </h2>
           <p>Select an area for zoom</p>
           <Input
