@@ -43,8 +43,8 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
 
     return newRows.filter((r) => {
       return (
-        (filters.city ? r.city === filters.city : true) &&
-        (filters.state ? r.state === filters.state : true) &&
+        (filters.city ? r.city.toLowerCase().includes(filters.city.toLowerCase()) : true) &&
+        (filters.state ? r.state.toLowerCase().includes(filters.state.toLowerCase()) : true) &&
         (filters.date ? r.date.includes(filters.date) : true) &&
         (filters.installs ? r.installs === Number(filters.installs) : true) &&
         (filters.trials ? r.trials === Number(filters.trials) : true)
@@ -82,6 +82,7 @@ export const DataGrid = <T extends {}>({ data, tableWidth }: GridProps<T>) => {
         enableFilters={enableFilters}
         filters={filters}
         onFiltersChange={setFilters}
+        headerFiltersHeight={80}
       />
     </>
   );

@@ -34,7 +34,7 @@ export const Dashboard = () => {
       {data?.length ? (
         <>
           <h2>
-            Chart data for {formatDate(filterDate)} spliced from 0 to&nbsp;{spliceTo === 0 ? 100 : spliceTo} (max:
+            Chart data for {filterDate} spliced from 0 to&nbsp;{spliceTo === 0 ? 100 : spliceTo} (max:
             {data?.length})
           </h2>
           <Input

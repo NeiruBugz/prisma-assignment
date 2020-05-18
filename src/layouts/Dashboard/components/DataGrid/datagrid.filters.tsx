@@ -23,3 +23,30 @@ export const DefaultFilterRenderer: ComponentType<FilterRendererProps<any>> = ({
     </div>
   );
 };
+
+export const DateFilterRenderer: ComponentType<FilterRendererProps<any>> = ({ value, onChange }) => {
+  return (
+    <div className="rdg-filter-container">
+      <section className="datagrid__filters datagrid__filters--date">
+        <div className="label-from">
+          <span>From: </span>
+          <input
+            className="rdg-filter filter__input--from"
+            value={value as string}
+            onChange={(e) => onChange(e.target.value)}
+            id="startDate"
+          />
+        </div>
+        <div className="label-to">
+          <span>To:</span>
+          <input
+            className="rdg-filter filter__input--to"
+            value={value as string}
+            onChange={(e) => onChange(e.target.value)}
+            id="endDate"
+          />
+        </div>
+      </section>
+    </div>
+  );
+};

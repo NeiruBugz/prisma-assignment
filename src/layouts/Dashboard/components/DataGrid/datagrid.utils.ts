@@ -1,8 +1,8 @@
 import { Column } from 'react-data-grid';
 
 import { Row } from '../../../../types/row.types';
-import { DateFormatter, DigitFormatter, IndexFormatter, PercentFormatter } from './datagrid.formatters';
-import { DefaultFilterRenderer } from './datagrid.filters';
+import { DigitFormatter, IndexFormatter, PercentFormatter } from './datagrid.formatters';
+import { DateFilterRenderer, DefaultFilterRenderer } from './datagrid.filters';
 
 const applyDefaultColumnsParams = <T extends {}>(columns: Column<T>[]): Column<T>[] => {
   const defaultProps: Partial<Column<T>> = {
@@ -27,7 +27,7 @@ export const DataColumns: Column<Row>[] = applyDefaultColumnsParams([
   {
     key: 'date',
     name: 'Date',
-    filterRenderer: DefaultFilterRenderer,
+    filterRenderer: DateFilterRenderer,
   },
   {
     key: 'state',
